@@ -19,3 +19,6 @@ RUN chown -R application:application /app/storage /app/bootstrap/cache
 
 # Generate key (bisa di-override lewat env variables Render nanti)
 # RUN php artisan key:generate --force
+
+# Beritahu Render bahwa server berjalan di port 80
+EXPOSE 80

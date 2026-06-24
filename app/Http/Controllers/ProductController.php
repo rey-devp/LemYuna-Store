@@ -14,7 +14,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::withCount('products')->get();
+        $categories = Category::orderBy('name')->get();
+        $categories->each(function ($category) {
+            $category->products_count = $category->products()->count();
+        });
 
         $query = Product::with('category')->active();
 
