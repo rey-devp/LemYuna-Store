@@ -19,9 +19,15 @@ class CategoryRepository
      */
     public function allWithProductCount(): Collection
     {
-        return Category::withCount('products')
-            ->orderBy('name')
-            ->get();
+        $categories = Category::orderBy('name')->get();
+
+        // withCount() tidak kompatibel dengan MongoDB,
+        // jadi kita hitung produk secara manual untuk tiap kategori.
+        $categories->each(function ($category) {
+            $category->products_count = $category->products()->count();
+        });
+
+        return $categories;
     }
 
     /**
