@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('game_id')->nullable()->after('email');
-            $table->string('streaming_username')->nullable()->after('game_id');
-            $table->string('whatsapp')->nullable()->after('streaming_username');
-            $table->string('preferred_payment')->nullable()->after('whatsapp');
+            $table->string('game_id')->nullable();
+            $table->string('streaming_username')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('preferred_payment')->nullable();
         });
     }
 
