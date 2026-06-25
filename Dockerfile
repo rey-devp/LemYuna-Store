@@ -9,8 +9,9 @@ RUN npm run build
 # Stage 2: Production PHP & Nginx server
 FROM webdevops/php-nginx:8.1
 
-# Install MongoDB extension
-RUN pecl install mongodb && docker-php-ext-enable mongodb
+# Install MongoDB extension using php-extension-installer
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
+RUN install-php-extensions mongodb
 
 # Nginx settings
 ENV WEB_DOCUMENT_ROOT=/app/public
